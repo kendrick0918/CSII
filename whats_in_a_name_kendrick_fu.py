@@ -1,99 +1,172 @@
-
+import random
 
 def main():
-  fullname = input("what is your name? (first, middle, last)") 
+    fullname = input("what is your name? (first, middle, last)") #user input
 
-  while True:
+    while True: #gives users menu of how to modify their input, and has them choose their functions
+        print("1. Print full name")
+        print("2. Reverse name")
+        print("3. Count number of vowels")
+        print("4. Count number of consonants")
+        print("5. Show first name")
+        print("6. Show last name")
+        print("7. Show middle name")
+        print("11. Exit")
 
-    print("Choose an option:")
-    functionchoice = input("Select an option (1-10), Choose 11 to break the code")
-    if functionchoice == "1":
-      printname()
-    elif functionchoice == "2":
-      reversename()
-    elif functionchoice == "3":
-      numberofvowels()
-    elif functionchoice == "4":
-      consonant_frequency()
-    elif functionchoice == "5":
-      print(firstname(fullname))
-    elif functionchoice == "6":
-       print(lastname(fullname))
-    elif functionchoice == "11":
-      break
-    else:
-      print("Invalid Choice, Please try again")
+        functionchoice = input("Select an option (1-10), Choose 11 to break the code") 
 
+        if functionchoice == "1":
+            print("name:", printname(fullname))
+        elif functionchoice == "2":
+            print("reversed name", reversename(fullname))
+        elif functionchoice == "3":
+            print("number of vowels in name", numberofvowels(fullname))
+        elif functionchoice == "4":
+            print("consonant frequency:",consonant_frequency(fullname))
+        elif functionchoice == "5":
+            print("first name:", print(firstname(fullname))) #remember to print the function, because its stored not printed. 
+        elif functionchoice == "6":
+            print("last name:", print(lastname(fullname)))
+        elif functionchoice == "7":
+            print("middle name:",print(middlename(fullname)))
+        elif functionchoice == "11":
+            break
+        else:
+            print("Invalid Choice, Please try again") #invalid choice
 
-
-
-
-def printname(fullname):
+def printname(fullname): # prints fullname
         print(fullname)
+'''
+    prints the fullname
 
-def reversename():
-    return text[::-1]
+    Args:
+        fullname(string): user input name
+    
+    Returns:
+        fullname(string): user input name
 
-def numberofvowels(fullname):
+    Raises:
+        Error: Description of the error 
+    '''
+
+def reversename(fullname):
+    return fullname[::-1] #reverses name by taking a string and reversing it
+'''
+    reverses name by taking a string and reversing it
+
+    Args:
+        vairable(type): Description of variable.
+    
+    Returns:
+        variable(type): Description of variable.  
+
+    Raises:
+        Error: Description of the error 
+    '''
+
+def numberofvowels(fullname): #takes a string and returns the number of vowels in it.
     vowels = 0
     vowels = ['a','e','i','o','u']
     for letter in fullname:
         if letter in ['a','e','i','o','u']:
             vowels += 1
     return vowels
+'''
+    takes a string and returns the number of vowels in it
 
-def consonant_frequency(fullname):
+    Args:
+        vairable(type): Description of variable.
+    
+    Returns:
+        variable(type): Description of variable.  
+
+    Raises:
+        Error: Description of the error 
+    '''
+def consonant_frequency(fullname): #takes a string and counts the number of consonants in it. 
     totalconsonants = 0
     totalconsonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']
     for letter in fullname:
         if letter in ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','x','y','z']:
             totalconsonants += 1
     return totalconsonants
+'''
+    takes a string and counts the number of consonants in it
 
-def firstname(fullname):
-    listofletters = []
-    for i in fullname:
-       if i == " ":
+    Args:
+        vairable(type): Description of variable.
+    
+    Returns:
+        variable(type): Description of variable.  
+
+    Raises:
+        Error: Description of the error 
+    '''
+def firstname(fullname): #takes a string(users fullname input) and isolates the first name and returns it.
+    first_name = ""
+    for char in fullname:
+       if char == " ":
           break
-       listofletters.append(i)
-    return "".join(listofletters)
-  
+       first_name += char
+    return first_name
+
+    '''
+    takes a string(users fullname input) and isloates the first name and returns it. 
+
+    Args:
+        vairable(type): Description of variable.
+    
+    Returns:
+        variable(type): Description of variable.  
+    '''
 
 
-def lastname(fullname):
-    list_of_letters = []
-    for i in fullname:
-       if i == " ":
+def lastname(fullname): #takes a string(user fullname input) isolates the last name and returns it. 
+    
+    lastspace = -1
+    for i in range(len(fullname)-1, -1 ,-1):
+       if fullname[i] == " ":
+          lastspace = i
           break
-       list_of_letters.append(i)
-    return "".join(list_of_letters)
+       if lastspace == -1:
+          print("last name not found")
+       lastname = ""
+       for i in range(i+1, len(fullname)):
+          lastname += fullname[i]
+    return lastname
+'''
+    takes a string(user fullname input) and isloates the last name and returns it. 
+
+    Args:
+        fullname(string): user input name
+    
+    Returns:
+        variable(type): Description of variable.  
+    '''
 
 def middlename(fullname):
     space = 0
     for char in fullname:
        if char == " ":
         space +=1
-       if space <=1:
-          middle = "Middle Name not Found"
+    
+       if space < 2:
+          return "Middle Name not Found"
        else:
           beg = 0
-          end = len(fullname)-1
-          for i in range(0, len(fullname)):
-             if fullname[i] == '':
-                beg +=1
+          end = 0
+
+          for i in range(len(fullname)):
+             if fullname[i] == ' ':
+                beg = i+1
                 break
              else:
-                beg = beg+1
-
-
-           
-          for i in range(len(fullname)-1,-1,-1):
-             if fullname[i] == '':
-                break
-             else:
-                end = end-1
-             middle = fullname[beg:end]
-             return middle
+                beg+=1
+             for i in range(len(fullname),0, -1):
+                if fullname [i-1] == " ":
+                   end = i
+                   break
+             
 
     
 
@@ -114,7 +187,7 @@ def convert_uppercase():
     pass
 def create_random_name():
     pass
-def if_palindrome():
+def if_palindrome(fullname):
     pass
 def arrayofcharacters():
     pass
@@ -122,7 +195,6 @@ def menu():
     pass
 def titledistinction():
     pass
-
 
 main()
     
