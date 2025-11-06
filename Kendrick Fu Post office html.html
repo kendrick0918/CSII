@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculate post office cost</title>
+  <script>
+
+   function getSize(l, w, h) {
+      if ((l >= 3.5 && l <= 4.25) && (w >= 3.5 && w <= 6) && (h >= 0.007 && h <= 0.016)) {
+        return "Post card";
+      } 
+      else if ((l > 4.25 && l <= 6) && (w > 6 && w <= 11.5) && (h >= 0.007 && h <= 0.015)) {
+        return "Large post card";
+      } 
+      else if ((l >= 3.5 && l <= 6.125) && (w >= 5 && w <= 11.5) && (h > 0.016 && h <= 0.25)) {
+        return "Envelope";
+      } 
+      else if ((l > 6.125 && l <= 24) && (w >= 11 && w <= 18) && (h > 0.25 && h <= 0.5)) {
+        return "Large envelope";
+      } 
+      else if (l + 2 * (w + h) <= 84) {
+        return "Package";
+      } 
+      else if (l + 2 * (w + h) <= 130) {
+        return "Large package";
+      } 
+      else {
+        return "Unmailable";
+      }
+    }
+    function getZip(zipcode) {
+      zipcode = parseInt(zipcode);
+      if (0 <= zipcode && zipcode <= 6999) {
+        return 1;
+      } else if (7000 <= zipcode && zipcode <= 19999) {
+        return 2;
+      } else if (20000 <= zipcode && zipcode <= 35999) {
+        return 3;
+      } else if (36000 <= zipcode && zipcode <= 62999) {
+        return 4;
+      } else if (63000 <= zipcode && zipcode <= 84999) {
+        return 5;
+      } else if (85000 <= zipcode && zipcode <= 99999) {
+        return 6;
+      } else {
+        return 0;
+    }
+  }
+    function calculateCost(mailType, distance) {
+      switch (mailType) {
+        case "Post card": return 0.20 + (0.03 * distance);
+        case "Large post card": return 0.37 + (0.03 * distance);
+        case "Envelope": return 0.37 + (0.04 * distance);
+        case "Large envelope": return 0.60 + (0.05 * distance);
+        case "Package": return 2.95 + (0.25 * distance);
+        case "Large package": return 3.95 + (0.35 * distance);
+        default: return 0.00;
+      }
+    }
+    // This function reads two input values, adds them, and displays the result.
+    function main() {
+      // Get values from the input fields
+      let length = document.getElementById("length").value;
+      let width = document.getElementById("width").value;
+      let height = document.getElementById("height").value;
+      let zip1 = document.getElementById("zip1").value;
+      let zip2 = document.getElementById("zip2").value;
+      console.log("Package Type: " + getSize(length,width,height))
+      if (!length || !width || !height || !zip1 || !zip2) {
+        document.getElementById("result").innerText = "Please enter all 5 values correctly"
+        return;
+      }
+
+      try {
+        length = parseFloat(length);
+        width = parseFloat(width);
+        height = parseFloat(height);
+        zip1 = parseFloat(zip1);
+        zip2 = parseFloat(zip2);
+      } catch (err) {
+      
+        document.getElementsByID("result").innerText = "Please enter correct data";
+      }
+      
+      const mailType = getSize(length, width, height);
+      const zoneto = getZip(zip1);
+      const zonefrom = getZip(zip2);
+      const distance = Math.abs(zonefrom - zoneto);
+      const cost = calculateCost(mailType, distance);
+      
+
+      if (mailType === "Unmailable") {
+        document.getElementsByID("result").innerText = "This Item Is Unmailable";
+        } else if (cost === 0.00) {
+         document.getElementById("result").innerText = "Invalid input or zip code.";
+        } else {
+         document.getElementById("result").innerText = "Mail Type: " + mailType + " | Cost: " + cost.toFixed(2).toString().replace(/^0+/, '');
+ }
+    }
+  </script>
+</head>
+<body>
+  <h2>Post Office Price Calculations</h2>
+
+  <!-- Input fields -->
+  <input type="number" id="length" placeholder="Enter length">
+  <input type="number" id="width" placeholder="Enter width">
+  <input type="number" id="height" placeholder="Enter height">
+  <input type="number" id="zip1" placeholder="Enter zip1">
+  <input type="number" id="zip2" placeholder="Enter zip2">
+  <!-- Button that calls the function -->
+  <button onclick="main()">Calculate</button>
+
+  <!-- Area to display the result -->
+  <p id="result"></p>
+</body>
+</html>
