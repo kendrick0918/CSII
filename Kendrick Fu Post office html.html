@@ -4,8 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculate post office cost</title>
-  <script>
+  <style>
+    body {
+      background-image : url(https://logos-world.net/wp-content/uploads/2020/10/United-States-Postal-Service-Logo.png);
 
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  </style>
+  <script>
+   
    function getSize(l, w, h) {
       if ((l >= 3.5 && l <= 4.25) && (w >= 3.5 && w <= 6) && (h >= 0.007 && h <= 0.016)) {
         return "Post card";
@@ -95,7 +105,7 @@
         } else if (cost === 0.00) {
          document.getElementById("result").innerText = "Invalid input or zip code.";
         } else {
-         document.getElementById("result").innerText = "Mail Type: " + mailType + " | Cost: " + cost.toFixed(2).toString().replace(/^0+/, '');
+         document.getElementById("result").innerText =  "Cost: " + cost.toFixed(2).toString().replace(/^0+/, '');
  }
     }
   </script>
