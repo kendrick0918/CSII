@@ -20,7 +20,6 @@ def load_display_data(infile, rows):
 
     #Load and display data from the Titanic CSV file.
         passengers = []
-        headers = []
 
         for line in infile:                         #input file
             fields = line.strip().split(',')
@@ -42,7 +41,7 @@ def getGender(infile):
         for line in infile:                         #input file
             fields = line.strip().split(',')
        
-            sex = fields[5]                         #gender column in input file
+            sex = fields[4]                         #gender column in input file
            
             if sex == "male":
                 male_count += 1
@@ -56,6 +55,8 @@ def getGender(infile):
     print("Male survivors:", male_count, "Female Survivors:", female_count)
 
 def calculate_basic_stats(headers, passengers):
+
+    
     """
     Calculates and displays basic statistics about the passengers.
     
@@ -85,8 +86,13 @@ def calculate_basic_stats(headers, passengers):
     print()
 
 
-def write_surv(input):
-    with open('genders.csv', 'w') as outfile:
+def write_surv():
+    print("inside at 89")
+
+    input = open("titanic.csv")
+    
+
+    with open('write_surv.csv', 'w') as outfile:
        
         total_pass = 0
         survivors = 0
@@ -101,11 +107,14 @@ def write_surv(input):
                 survivors += 1
                 total_pass  +=1
             else:
-                survivors
+                total_pass+=1
            
-        outfile.write("Male" + "," + "Female")
+        outfile.write("Survivors" + "," + " Total Passengers")
         outfile.write("\n")
-        outfile.write(str(male_count) + "," + str(female_count))
+        outfile.write(str(survivors) + "," + str(total_pass))
+
+        input.close()
+        outfile.close()
 
 
 
@@ -160,43 +169,78 @@ def write_first_class(headers, passengers, output_file):
     """
     # TODO: Filter first-class passengers and write to file
     # Include survival rate at the top
-    with open('genders.csv', 'w') as outfile:
+    with open('write_first_class.csv', 'w') as outfile:
        
        
-        male_count = 0
-        female_count = 0
+        firstclasscount = 0
+        first_class_survivors = 0
        
-        for line in infile:                         #input file
+        for line in headers, passengers:                         #input file
             fields = line.strip().split(',')
        
-            sex = fields[5]                         #gender column in input file
+            pclass = fields[2]                         #Pclass column in input file
+            lived = fields[1]
            
-            if sex == "male":
-                male_count += 1
-            elif sex == "female":
-                female_count += 1
+            if pclass == "1":
+                firstclasscount += 1
+                if lived == "1":
+                    first_class_survivors += 1
+            
+            if first_class_survivors > 0:
+                survivalrate = (first_class_survivors/firstclasscount)*100
+            else:
+                survivalrate = 0
            
-        outfile.write("Male" + "," + "Female")
+        outfile.write("Percentage of survival:", survivalrate,"%")
         outfile.write("\n")
-        outfile.write(str(male_count) + "," + str(female_count))
-    
-    print("Male survivors:", male_count, "Female Survivors:", female_count)
+        outfile.write()
+    print("first class survival rate:", survivalrate, "%")
     pass
 
-
-def write_children(headers, passengers, output_file):
     """
+def write_children():
+    
     Writes information about passengers under 18 to a file.
     
     Args:
         headers (list): List of column names
         passengers (list): List of passenger records
         output_file (str): Name of output file
-    """
+
     # TODO: Filter passengers under 18 and write to file
     # Remember: some ages might be missing!
-    pass
+    passengers = open("titanic.csv")
+    next
+    with open('write_children.csv', 'w') as outfile:
+       
+       
+        children_count = 0
+        #age = int(age)
 
+        for line in passengers:                         #input file
+            fields = line.strip().split(',')
+            print(fields)
+
+            print(fields[6])
+            if fields[6] == 'Age':
+                continue
+            else:
+                if len(fields[6]) == 0:
+                    age_index = 0
+                else:
+                    age_index = int(fields[6])              #age column in input file
+            
+            if age_index < 18:
+                children_count += 1
+
+        print(children_count)
+           
+       # outfile.write("Male" + "," + "Female")
+       # outfile.write("\n")
+       # outfile.write(str(male_count) + "," + str(female_count))
+    
+    #print("Male survivors:", male_count, "Female Survivors:", female_count)
+"""
 
 def generate_analysis_report(headers, passengers, output_file):
     """
@@ -213,11 +257,11 @@ def generate_analysis_report(headers, passengers, output_file):
     pass
 
 def main():
-    input_file = open('titanic.csv')
-    rows = []
-    input_file.seek(1)                  #move pointer of input file to top of file
-    for line in input_file:
-        rows.append(line.strip().split(','))
+    print("in main")
+    write_surv()
+    #write_children()
+
+   
 
     #getGender(input_file)
     #load_display_data(input_file, rows)
