@@ -41,7 +41,10 @@ def load_display_data():
                 outfile.write(line)
 
 
-def getGender(infile):
+def getGender():
+
+    input = open("titanic.csv")
+
     with open('genders.csv', 'w') as outfile:
         '''
         Counts the number of male and female passengers in the dataset and writes the counts to a CSV file.
@@ -58,10 +61,10 @@ def getGender(infile):
         male_count = 0
         female_count = 0
        
-        for line in infile:                         #input file
+        for line in input:                         #input file
             fields = line.strip().split(',')
        
-            sex = fields[4]                         #gender column in input file
+            sex = fields[5]                         #gender column in input file
            
             if sex == "male":
                 male_count += 1
