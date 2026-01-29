@@ -1,6 +1,6 @@
 
 
-#titanic column indices (this improves code readability to help identify columns by name)
+#titanic columns (this improves code readability to help identify columns by name)
 PASSENGERID = 0
 SURVIVED = 1
 PCLASS = 2
