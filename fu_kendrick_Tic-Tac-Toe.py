@@ -1,17 +1,17 @@
 # Tic-Tac-Toe
-# Kendrick Fu | Date
+# Kendrick Fu | 4/2/26
 import random
 
-#remeber that all the spacing is for board ui and is important for the game to work properly, so when you are checking for winners, make sure to include the space before the x and o.
+# remember that all the spacing is for board ui and is important for the game to work properly, so when you are checking for winners, make sure to include the space before the x and o.
 # The board is a 2d list, and the user will input the row and column they want to place their piece in. The game will check for a winner after each move, and if there is a winner, it will end the game. If there is no winner and the board is full, it will declare a draw. The user can choose to play against another player or against the computer. The computer will make random moves.
-# The functions are as follows:
-# get_player_move(board, player, turn): This function will get the player's move and return
-# check_winner(board): This function will check if there is a winner and return the winner if there is one.
-# ai(board): This function will make a random move for the computer
-# is_draw(board): This function will check if the board is full and return True if it is, and False if it isn't.
-# display_board(board): This function will display the board to the user.
-# main(): This function will run the game loop and call the other functions as needed
 
+
+
+
+
+
+
+#all formating for this function needs to be reviewed if referencing, all has to align.
 def get_player_move(board, player, turn):
     while True:
         try:
@@ -33,9 +33,9 @@ def get_player_move(board, player, turn):
             
         except ValueError:
             print("Invalid input, please enter a number ")
-
+# get_player_move(board, player, turn): This function will get the player's move and return
 def check_winner(board):
-
+# check_winner(board): This function will check if there is a winner and return the winner if there is one.
     if board [0][0] == ' x' and board [0][1] == ' x' and board [0][2] == ' x':
         return ' x'
     elif board [0][0] == ' x' and board [0][1] == ' x' and board [0][2] == ' x':
@@ -76,6 +76,7 @@ def check_winner(board):
 def ai(board): 
     #making a smart ai
     # all combinations wins can be
+    # ai(board): This function will make a random move for the computer
     wins = [
         [0,0, 0,1, 0,2],
         [1,0, 1,1, 1,2],
@@ -107,6 +108,7 @@ def ai(board):
             continue
 
 def is_draw(board):
+    # is_draw(board): This function will check if the board is full and return True if it is, and False if it isn't.
     for row in board:
         for cell in row:
             if cell == " _":
@@ -114,6 +116,7 @@ def is_draw(board):
     return True
 
 def display_board(board):
+    # display_board(board): This function will display the board to the user.
     for row in board:
         for cell in row:
             print(cell, end=' ')
@@ -132,7 +135,7 @@ def main():
 
 
     while True:
-        board = [[" _"," _"," _"],
+        board = [[" _"," _"," _"], #this is my board
                     [" _"," _"," _"],
                     [" _"," _"," _"]]
         display_board(board)
