@@ -1,15 +1,24 @@
-# Tic-Tac-Toe
-# Kendrick Fu | 4/2/26
-#Description: Tic Tac Toe game that gives options to play humans or AI, gives play again option, AI is smart(er).
-#Log 1.2
-#Bonuses: Made AI smart by blocking winning move if there is an empty space between two x's 
-#Bugs: 3/20 - had issues with the board and range - fixed by adding -1 to the row and column inputs. 
-#Bugs: 3/27 - finished code - issues with user interface, changed board from brackets to underscores, and spaced our correctly.
+
 import random
-# remember that all the spacing is for board ui and is important for the game to work properly, so when you are checking for winners, make sure to include the space before the x and o.
-# The board is a 2d list, and the user will input the row and column they want to place their piece in. The game will check for a winner after each move, and if there is a winner, it will end the game. If there is no winner and the board is full, it will declare a draw. The user can choose to play against another player or against the computer. The computer will make random moves.
-#all formating for this function needs to be reviewed if referencing, all has to align.
+
 def get_player_move(board, player, turn):
+    '''
+    Asks the player for row and column coordinates to place their piece.
+    keeps asking until a valid answer is given
+ 
+    Args:
+        board (list): 2D list representing the current game board.
+        player (str): Name of the player whose turn it is.
+        turn (str): Current turn symbol, either ' x' or ' o'. (spaces for UI purposes)
+ 
+    Returns:
+        row (int): Row index (0-2) of the player's move.
+        column (int): Column index (0-2) of the player's move.
+ 
+    Raises:
+        None
+    '''
+
     while True:
         try:
             print(f"\nPlayer {player}'s turn. (_ means board space is empty)")
@@ -32,6 +41,18 @@ def get_player_move(board, player, turn):
             print("Invalid input, please enter a number ")
 # get_player_move(board, player, turn): This function will get the player's move and return
 def check_winner(board):
+    '''
+    Checks all 8 possible winning combinations to see if either player has won.
+ 
+    Args:
+        board (list): 2D list representing the current game board.
+ 
+    Returns:
+        str: ' x' if x wins, ' o' if o wins, None if no winner yet.
+ 
+    Raises:
+        None
+    '''
 # check_winner(board): This function will check if there is a winner and return the winner if there is one.
     if board [0][0] == ' x' and board [0][1] == ' x' and board [0][2] == ' x':
         return ' x'
@@ -75,6 +96,19 @@ def ai(board):
     # all combinations wins can be
     # ai(board): This function will make a random move for the computer
     #wins is all possible combinations to win the function. 
+    '''
+    Makes a smart move for the computer. First checks if the player is about to win
+    and blocks them. If no threat is found, picks a random empty spot.
+ 
+    Args:
+        board (list): 2D list representing the current game board.
+ 
+    Returns:
+        None
+ 
+    Raises:
+        None
+    '''
     wins = [
         [0,0, 0,1, 0,2],
         [1,0, 1,1, 1,2],
@@ -106,6 +140,18 @@ def ai(board):
             continue
 
 def is_draw(board):
+    '''
+    Checks if the board is completely full with no empty spaces left.
+ 
+    Args:
+        board (list): 2D list representing the current game board.
+ 
+    Returns:
+        bool: True if the board is full and it is a draw, False if there are still empty spaces.
+ 
+    Raises:
+        None
+    '''
     # is_draw(board): This function will check if the board is full and return True if it is, and False if it isn't.
     for row in board:
         for cell in row:
@@ -114,6 +160,18 @@ def is_draw(board):
     return True
 
 def display_board(board):
+    '''
+    Prints the tictactoe board
+ 
+    Args:
+        board (list): 2D list representing the current game board.
+ 
+    Returns:
+        None
+ 
+    Raises:
+        None
+    '''
     # display_board(board): This function displays the tictactoe board to the user
     for row in board:
         for cell in row:
@@ -123,9 +181,6 @@ def display_board(board):
 
 def main():
 
-#problems you might run into: 
-
-    
     player = input("what is your name?")
     gamemode = input("Do you want to play against the Computer or another player? (1 for Ai, 2 for Multiplayer)") #user input for game
     if gamemode == "2":
