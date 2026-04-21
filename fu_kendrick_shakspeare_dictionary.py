@@ -14,6 +14,20 @@ list of completed functions: shakespeare, writecsv
 stop_words = ['tell','and', 'or', 'i', 'the', 'a', 'to', 'of', 'in', 'is', 'it', 'that', 'you', 'my', 'not','with','his','be','have','but','your','he','our','me','for','what','all','so','as','him','we','do','are','will','which','no','on','this','they','from','yet','by','if','now','her','shall','o','thy','thee','she','then','here','an','go','am','thou','when','come','when','us','there','upon','at','them','and','hath','would','was','time','well','who','should','did','like','were','make','where','done','let','how','had','may','see','speak','one','must','why','most','say','tis','ill','their','more','man','no','sir','than','out','second','out','mine','too','up','before','can','nor','does','such','those','give','look','enter','some','never','these','know','thorugh','true','take','away','wood','doth','thus','third','much','good','ay','word','back']
 counts = dict() 
 def shakespeare():
+    '''
+    Reads a Shakespeare text file entered by the user, cleans the text by
+    removing punctuation and converting to lowercase, then counts the
+    frequency of all meaningful words not in the stop words list.
+ 
+    Args:
+        None
+ 
+    Returns:
+        None
+ 
+    Raises:
+        Exception: If the file cannot be opened, prints an error message and exits.
+    '''
     fname = input('Enter the file name: ')
     try:
         fhand = open(fname)
@@ -39,6 +53,19 @@ def shakespeare():
 
     
 def writecsv():
+    '''
+    Writes the top 20 most frequent words and their counts from the counts
+    dictionary into a CSV file called write.csv.
+ 
+    Args:
+        None
+ 
+    Returns:
+        None
+ 
+    Raises:
+        Exception: If the file cannot be written to, prints an error message and the exception.
+    '''
     try:
         with open("write.csv", 'w') as outfile: 
 
