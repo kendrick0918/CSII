@@ -1,4 +1,14 @@
-
+'''
+fu_Kendrick_titanic.py
+Description: This script analyzes the Titanic dataset by reading
+passenger records from a CSV file. It includes functions to display
+the first 10 records, count genders, calculate survival stats,
+filter by class and age, and generate a full analysis report.
+Results are written to separate CSV output files.
+Functions: load_display_data, getGender, calculate_basic_stats,
+        write_surv, write_first_class, write_children,
+        generate_analysis_report, main
+'''
 
 #titanic columns (this improves code readability to help identify columns by name)
 PASSENGERID = 0
@@ -237,17 +247,17 @@ def generate_analysis_report():
     with open('Generate_analysis_report.csv','w') as outfile:
 
         
-        
+        #counters for totals
         total_passengers = 0
         total_survived = 0
-
+        #counters for classes
         firstclasstotal = 0
         firstclasssurv = 0
         secondclasstotal = 0
         secondclasssurv = 0
         thirdclasstotal = 0
         thirdclasssurv = 0
-
+        #counters for genders
         male_total = 0
         male_surv = 0
         female_total = 0
@@ -263,7 +273,7 @@ def generate_analysis_report():
 
         for line in input:
             fields = line.strip().split(",")
-
+            #pulling the column with data needed
             pclass = fields[2]
             gender = fields[4]
             age = fields[6]
@@ -273,7 +283,7 @@ def generate_analysis_report():
 
             if survived == "1":
                 total_survived += 1
-
+            #count by class and class survivors
             if pclass == "1":
                 firstclasstotal += 1
                 if survived == "1":
@@ -295,7 +305,7 @@ def generate_analysis_report():
                 female_total += 1
                 if survived == "1":
                     female_surv += 1
-
+            #add age to sum if it exists
             if age != "":
                 try:
                     age_sum += float(age)
@@ -303,7 +313,7 @@ def generate_analysis_report():
                 except ValueError as e:
                     print(f"Error converting age '{age}' to float: {e}")
                     
-
+        
         outfile.write("Category,Total,Survived,Survival Rate")
         outfile.write("\n")
         if total_passengers > 0:
