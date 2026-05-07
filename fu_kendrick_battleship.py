@@ -12,8 +12,11 @@ Features: 5 by 5 board, 5 ships placed randomly on the board, user interface inc
 Log: 1.2
 
 Bugs: There is an issue with the code at the naming of the boards, the error says that it doesn't have a name/value to pull from so something is not formated/labeled correctly.
-Bugs: still havent implemented a YOU WIN! at the end, or done a play again
+Bugs: There is an issue with positional arguments in line 220, I fixed by deleting the whole part. Player variable had more than 1 thing pulling. 
+Bugs: im lazy and am not sure if there are any more bugs, but I will test and see if there are any more.
 '''
+
+
 #Data
 #arguments
 #
@@ -34,7 +37,7 @@ def display_board(board):
     # display the board with a label
     for row in board:
         for cell in row:
-            print(cell, end=' ')
+            print(cell, end=' ') #I cant go to the bathroom alone
         print()
 
 
@@ -145,16 +148,18 @@ def computer_shot(display_board_player, hidden_board_player):
 
 def check_all_sunk(hidden):
     '''
-    Def here. 
+    Checks if board is hit at that specific spot
 
     Args:
-        vairable(type): Description of variable.
+        hidden (list): A 2D list representing the hidden game board.
     
     Returns:
-        variable(type): Description of variable.  
+        bool: 
+            True if all ships have been sunk
+            False if at least one ship remains
 
     Raises:
-        Error: Description of the error 
+        None
     '''
 
     # check if all ships have been hit
@@ -166,10 +171,15 @@ def check_all_sunk(hidden):
 
 
 def main():
-    player = input("What is your name? ")
+
+    '''
+    Basically the battleship game
+
+    '''
+    player = input("What is your name? ") 
     num_dots = int(input("How many ships do you want? (1-5): "))
     print(f"\nWelcome to Battleship, {player}!")
-    print(f"There are {num_dots} ships hidden on each board.")
+    print(f"There are {num_dots} ships hidden on each board.") #all of these pretty self explaintory
     print("First to sink all the opponent's ships wins!")
     print("H = Hit, M = Miss, _ = Unknown\n")
 
@@ -198,8 +208,8 @@ def main():
                                   [" _"," _"," _"," _"," _"],
                                   [" _"," _"," _"," _"," _"]]
 
-        place_ships(hidden_board_player, num_dots)
-        place_ships(hidden_board_computer, num_dots)
+        place_ships(hidden_board_player, num_dots) #places ships on all the boards
+        place_ships(hidden_board_computer, num_dots) #places ships on all the boards
 
         while True:
             print("Computer's Board")
@@ -217,7 +227,7 @@ def main():
                 print("missed")
 
             if check_all_sunk(hidden_board_computer):
-                display_board(display_board_computer, f"{player}'s shots:")
+                display_board(display_board_computer)
                 print(f"\nYou sunk all the computer's ships! You win, {player}!")
                 break
 
@@ -228,12 +238,12 @@ def main():
                 print(f"Computer hit your ship! Position of your ship is: row {row+1}, column {col+1}!")
             else:
                 print(f"Computer missed! Row {row+1}, Column {col+1}.")
-
+            #check if player won or lost 
             if check_all_sunk(hidden_board_player):
                 display_board(display_board_player, "Computer's shots:")
                 print(f"\nThe computer sunk all your ships, you lose.")
                 break
-
+        #the play again function
         playagain = input("\nDo you want to play again? (yes or no) ")
         if playagain == "yes":
             continue
