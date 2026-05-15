@@ -17,12 +17,33 @@ reverse digits in number
 
 Log: 1.2
 
-Bugs: no bugs after testing 
+Tester: Jackson Lieberman
+Bugs:
+1. error in sum of digits -- ex: input = 67 and output = 13.7
+2. error in product of digits -- ex: input = 67 and output = 46.9
+3. code crashes when an input that isn't acepted is given
 '''
 
+def get_int(userinput):
+    '''
+    Description: Gets an integer from the user and keeps asking until a valid
+    integer is entered.
+
+    Args:
+        prompt(str): The message shown to the user
+
+    Returns:
+        int: A valid integer entered by the user
+    '''
+    while True:
+        try:
+            return int(input(userinput))
+        except ValueError:
+            print('Invalid input. Please enter an integer.')
+
 def factorial(n):
-     '''
-    Finds the factorial of a number.
+    '''
+    Description: Finds the factorial of a number.
 
     Args:
         n(int): The number to find the factorial of.
@@ -38,7 +59,7 @@ def factorial(n):
 
 def summation(n):
     '''
-    Finds the sum of all integers from 1 to n.
+    Descrpition: Finds the sum of all integers from 1 to n.
 
     Args:
         n(int): The ending number.
@@ -51,10 +72,10 @@ def summation(n):
     return n + summation(n - 1)
 
 
-# 3. Power and Exponential function (a^n)
-def power(a, n):
+
+def power(base, exponent):
     '''
-    Finds base number raised to a power.
+    Descrpition: Finds base number raised to a power.
 
     Args:
         base(int): The base number.
@@ -64,15 +85,15 @@ def power(a, n):
         base number raised to exponent.
     '''
 
-    if n == 0:
+    if exponent == 0:
         return 1
-    return a * power(a, n - 1)
+    return base * power(base, exponent= - 1)
 
 
-# 4. Fibonacci numbers
+
 def fibonacci(n):
     '''
-    Finds the nth Fibonacci number.
+    Descrpition: Finds the nth Fibonacci number.
 
     Args:
         n(int): The position in the Fibonacci sequence.
@@ -86,11 +107,10 @@ def fibonacci(n):
         return 1
     return fibonacci(n - 1) + fibonacci(n - 2)
 
-# % mean 
-# 5. Sum of a number's digits
+
 def sum_digits(n):
     '''
-    Finds the sum of all digits in a number.
+    Description: Finds the sum of all digits in a number.
 
     Args:
         n(int): The number whose digits will be added.
@@ -98,19 +118,16 @@ def sum_digits(n):
     Returns:
         int: The sum of the digits.
     '''
-
-    #  % is modulus. It returns the remainder.
-    # Example: 123 % 10 = 3
     
     if n < 10:
         return n
-    return (n % 10) + sum_digits(n / 10)
+    return (n % 10) + sum_digits(n // 10) #bug only fixed if I used // instead of /
 
 
-# 6. Product of a number's digits
+
 def product_digits(n):
     '''
-    Finds the product of all digits in a number
+    Description: Finds the product of all digits in a number
 
     Args:
         n(int): The number whose digits will be multiplied.
@@ -120,13 +137,13 @@ def product_digits(n):
     '''
     if n < 10:
         return n
-    return (n % 10) * product_digits(n / 10)
+    return (n % 10) * product_digits(n // 10) #bug only fixed if I used // instead of /
 
 
-# 7. Product of two whole numbers (using repeated addition)
+
 def multiply(a, b):
     '''
-    Multiplies two whole numbers
+    Description: Multiplies two whole numbers
 
     Args:
         a(int): The first number
@@ -140,10 +157,10 @@ def multiply(a, b):
     return a + multiply(a, b - 1)
 
 
-# 8. Sum of numbers in a range
+
 def range_sum(start, end):
     '''
-    Finds the sum of all numbers in the range 
+    Description: Finds the sum of all numbers in the range 
 
     Args:
         start(int): The first number in the range.
@@ -159,24 +176,11 @@ def range_sum(start, end):
     return start + range_sum(start + 1, end)
 
 
-# 9. Reverse the digits in a number
-def reverse_number(n, rev=0):
-    '''
-    Reverses the digits of a number using recursion
-
-    Args:
-        n(int): The original number.
-        reversed_num(int): The reversed number being built.
-
-    Returns:
-        The digits of n in reverse order
-    '''
-    if n == 0:
-        return rev
-    return reverse_number(n // 10, rev * 10 + n % 10) 
 
 
-# Main menu
+
+
+# Menu
 def main():
     #simple menu choice 
     while True:
@@ -189,57 +193,52 @@ def main():
         print("6. Product of Digits")
         print("7. Product of Two Numbers")
         print("8. Sum of Numbers in a Range")
-        print("9. Reverse a Number")
+        
         print("0. Exit")
 
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            n = int(input("Enter a number: "))
+            n = get_int("Enter a number: ")
             print("Factorial =", factorial(n))
 
         elif choice == "2":
-            n = int(input("Enter a number: "))
+            n = get_int("Enter a number: ")
             print("Summation =", summation(n))
 
         elif choice == "3":
-            a = int(input("Enter the base: "))
-            n = int(input("Enter the exponent: "))
-            print("Power =", power(a, n))
+            base = get_int("Enter the base: ")
+            exponent = get_int("Enter the exponent: ")
+            print("Power =", power(base, exponent))
 
         elif choice == "4":
-            n = int(input("Enter n: "))
+            n = get_int("Enter n: ")
             print("Fibonacci =", fibonacci(n))
 
         elif choice == "5":
-            n = int(input("Enter a number: "))
+            n = get_int("Enter a number: ")
             print("Sum of Digits =", sum_digits(n))
 
         elif choice == "6":
-            n = int(input("Enter a number: "))
+            n = get_int("Enter a number: ")
             print("Product of Digits =", product_digits(n))
 
         elif choice == "7":
-            a = int(input("Enter first number: "))
-            b = int(input("Enter second number: "))
+            a = get_int("Enter first number: ")
+            b = get_int("Enter second number: ")
             print("Product =", multiply(a, b))
 
         elif choice == "8":
-            start = int(input("Enter start of range: "))
-            end = int(input("Enter end of range: "))
+            start = get_int("Enter start of range: ")
+            end = get_int("Enter end of range: ")
             print("Range Sum =", range_sum(start, end))
 
-        elif choice == "9":
-            n = int(input("Enter a number: "))
-            print("Reversed Number =", reverse_number(n))
-
         elif choice == "0":
-            print("Goodbye!")
+            print("thank you for playing")
             break
 
         else:
             print("Invalid choice. Try again.")
 
 
-# Run the program
 main()
