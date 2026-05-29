@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <h1>Classes Survey Form</h1>
+    <!-- Create Form -->
+    <form id="form" action="/save_data" method="GET">
+        <!-- Details -->
+        <div class="form-control">
+            <label for="name" id="label-name">
+                Name
+            </label>
+            <input type="text" 
+                    id="name" 
+                    name="name"
+                    placeholder="Enter your name"/>
+        </div>
+        <div class="form-control">
+            <label for="role" id="label-role">
+                Which option best describes you?
+            </label>
+            <select name="role" id="role">
+                <option value="student">Coach</option>
+                <option value="intern">Player/Former Player</option>
+                <option value="professional">Pundit</option>
+                <option value="other">Journalist</option>
+            </select>
+        </div>
+        <div class="form-control">
+            <label>
+                Is the Ballondor a Fair Competition?
+            </label>
+            <label for="recommed-1">
+                #type radio means that it's a yes no box, not a checkbox
+                <input type="radio" 
+                    id="recommed-1" 
+                    name="recommed"
+                    value = "Yes">
+                    Yes
+            </label>
+            <label for="recommed-2">
+                <input type="radio" 
+                    id="recommed-2" 
+                    name="recommed"
+                    value = "No">
+                    No
+            </label>
+        </div>
+        <div class="form-control">
+            <label>Who should win Balondior
+                <small>(Check as many as you want)</small> <br>
+            </label>
+            <label for="inp-1"> 
+                <input type="checkbox" name="inp" value = "Messi"> Messi (InterMiami) <br>
+            </label>
+            <label for="inp-2">
+                <input type="checkbox" name="inp" value = "Ronaldo"> Ronaldo (Al-Nassr) <br>
+            </label>
+            <label for="inp-3">
+                <input type="checkbox" name="inp" value = "Olise"> Olise (Bayern) <br>
+            </label>
+            <label for="inp-4">
+                <input type="checkbox" name="inp" value = "Kane"> Kane (Bayern) <br>
+            </label>
+            <label for="inp-5">
+                <input type="checkbox" name="inp" value = "Bellingham"> Bellingham (Real Madrid) <br>
+            </label>
+            <label for="inp-6">
+                <input type="checkbox" name="inp" value = "Kvaratskhelia"> Kvaratskhelia (PSG) <br>
+            </label>
+            <label for="inp-7">
+                <input type="checkbox" name="inp" value = "Raphina"> Raphina (Barcelona) <br>
+            </label>
+            <label for="inp-8">
+                <input type="checkbox" name="inp" value = "Yamal"> Yamal (Barcelona) <br>
+            </label>
+            <label for="inp-9">
+                <input type="checkbox" name="inp" value = "Mbappe"> Mbappe (Real Madrid) <br>
+            </label>
+            <label for="inp-10">
+                <input type="checkbox" name="inp" value = "Pedri"> Pedri (Barcelona) <br>
+            </label>
+        </div>
+        <button type="Submit">
+            Submit Data
+        </button>
+
+    </form>
+</body>
+</html>
